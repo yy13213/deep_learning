@@ -1,0 +1,6 @@
+# GPU 用户请到 https://pytorch.org 选择对应 CUDA 版本的安装命令
+torch>=2.1.0
+numpy>=1.24.0
+matplotlib>=3.7.0
+jupyter>=1.0.0
+ipywidgets>=8.0.0
