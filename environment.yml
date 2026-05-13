@@ -1,0 +1,8 @@
+name: dl-exp3
+channels:
+  - defaults
+dependencies:
+  - python=3.10
+  - pip
+  - pip:
+      - -r requirements-dl-exp3.txt
