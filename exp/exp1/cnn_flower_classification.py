@@ -28,7 +28,7 @@ DEVICE = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 NORMALIZE = transforms.Normalize([0.5, 0.5, 0.5], [0.5, 0.5, 0.5])
 TRANSFORMER_IMAGE = transforms.Compose(
     [
-        transforms.Resize((28, 28)),
+        transforms.Resize((64, 64)),
         transforms.ToTensor(),
         NORMALIZE,
     ]
@@ -131,7 +131,7 @@ def split_train_val_data(
 
 
 class CNN(nn.Module):
-    def __init__(self, in_channels: int = 3, n_classes: int = 5):
+    def __init__(self, in_channels: int = 3, n_classes: int = 102):
         super().__init__()
         self.conv1 = nn.Sequential(
             nn.Conv2d(in_channels, 24, kernel_size=3, stride=1, padding=1),
@@ -143,7 +143,7 @@ class CNN(nn.Module):
             nn.ReLU(),
             nn.MaxPool2d(kernel_size=2),
         )
-        self.fc1 = nn.Sequential(nn.Linear(12 * 7 * 7, 196), nn.ReLU())
+        self.fc1 = nn.Sequential(nn.Linear(12 * 16 * 16, 196), nn.ReLU())
         self.fc2 = nn.Sequential(nn.Linear(196, 84), nn.ReLU())
         self.fc3 = nn.Linear(84, n_classes)
 
@@ -158,7 +158,7 @@ class CNN(nn.Module):
 
 
 class CNNDeep(nn.Module):
-    def __init__(self, in_channels: int = 3, n_classes: int = 5, p_drop: float = 0.3):
+    def __init__(self, in_channels: int = 3, n_classes: int = 102, p_drop: float = 0.3):
         super().__init__()
         self.features = nn.Sequential(
             nn.Conv2d(in_channels, 32, 3, padding=1),
@@ -173,7 +173,7 @@ class CNNDeep(nn.Module):
         )
         self.fc = nn.Sequential(
             nn.Flatten(),
-            nn.Linear(128 * 3 * 3, 256),
+            nn.Linear(128 * 8 * 8, 256),
             nn.ReLU(),
             nn.Dropout(p_drop),
             nn.Linear(256, n_classes),
@@ -242,10 +242,10 @@ def save_history_figure(history: dict, out_path: Path) -> None:
 
 
 def run_smoke_test() -> None:
-    x = torch.randn(8, 3, 28, 28, device=DEVICE)
-    y = torch.randint(0, 5, (8,), device=DEVICE)
+    x = torch.randn(8, 3, 64, 64, device=DEVICE)
+    y = torch.randint(0, 102, (8,), device=DEVICE)
     loss_fn = nn.CrossEntropyLoss()
-    for name, model in [("baseline", CNN(3, 5)), ("deep", CNNDeep(3, 5))]:
+    for name, model in [("baseline", CNN(3, 102)), ("deep", CNNDeep(3, 102))]:
         model = model.to(DEVICE)
         logits = model(x)
         loss = loss_fn(logits, y)
@@ -255,7 +255,7 @@ def run_smoke_test() -> None:
 
 def main() -> None:
     parser = argparse.ArgumentParser(description="exp1 CNN flower classification script")
-    parser.add_argument("--data-dir", default=os.environ.get("FLOWERS_DATA_DIR", "data/flowers"))
+    parser.add_argument("--data-dir", default=os.environ.get("FLOWERS_DATA_DIR", "data/flowers/images"))
     parser.add_argument("--zip-path", default=os.environ.get("FLOWERS_ZIP_PATH", ""))
     parser.add_argument("--epochs", type=int, default=10)
     parser.add_argument("--batch-size", type=int, default=20)

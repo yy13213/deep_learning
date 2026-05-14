@@ -26,7 +26,7 @@ DEVICE = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 
 
 def load_dataset(
-    batch_size: int = 128,
+    batch_size: int = 256,
     download: bool = True,
     root: str = "data",
     limit_train: Optional[int] = None,
