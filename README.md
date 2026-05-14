@@ -6,9 +6,9 @@
 
 | 实验 | 主题 | 框架 | 数据集 | 模型数 | 关键结果 |
 |------|------|------|--------|--------|---------|
-| [实验 1](./exp/exp1/README.md) | CNN 图像分类 | PyTorch | Flower Recognition (102 类) | 3 | Baseline 40% → Optimized 71% → Residual 76% |
-| [实验 2](./exp/exp2/README.md) | RNN 时间序列预测 | PyTorch | 正弦波 sin(pi*x) | 3 | LSTM 最优 MSE 3.1e-7, R2 > 0.99999 |
-| [实验 3](./exp/exp3/README.md) | GAN 图像生成 | PyTorch | MNIST (10 类数字) | 2 | 从噪声到清晰数字，50 epoch 收敛 |
+| [实验 1](./README_exp1.md) | CNN 图像分类 | PyTorch | Flower Recognition (102 类) | 3 | Baseline 40% → Optimized 71% → Residual 76% |
+| [实验 2](./README_exp2.md) | RNN 时间序列预测 | PyTorch | 正弦波 sin(pi*x) | 3 | LSTM 最优 MSE 3.1e-7, R2 > 0.99999 |
+| [实验 3](./README_exp3.md) | GAN 图像生成 | PyTorch | MNIST (10 类数字) | 2 | 从噪声到清晰数字，50 epoch 收敛 |
 
 ## 项目结构
 
@@ -67,6 +67,6 @@ python dcgan_mnist_improved.py
 
 ## 各实验详细说明
 
-- [实验 1: CNN 花卉分类](./exp/exp1/README.md) — 从简单 CNN 到残差网络的演进，数据增强、BatchNorm、Dropout、AdamW 等训练技巧的系统引入
-- [实验 2: RNN 时间序列预测](./exp/exp2/README.md) — RNN/LSTM/GRU 对正弦波的对比预测，长窗口、残差预测、早停、超参搜索
-- [实验 3: GAN 图像生成](./exp/exp3/README.md) — DCGAN 生成 MNIST 数字，Hinge Loss、SpectralNorm、EMA、条件生成、实例噪声
+- [实验 1: CNN 花卉分类](./README_exp1.md) — 从简单 CNN 到残差网络的演进，数据增强、BatchNorm、Dropout、AdamW 等训练技巧的系统引入
+- [实验 2: RNN 时间序列预测](./README_exp2.md) — RNN/LSTM/GRU 对正弦波的对比预测，长窗口、残差预测、早停、超参搜索
+- [实验 3: GAN 图像生成](./README_exp3.md) — DCGAN 生成 MNIST 数字，Hinge Loss、SpectralNorm、EMA、条件生成、实例噪声
