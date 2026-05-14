@@ -104,15 +104,15 @@ ResidualBlock:
 
 **原始 Baseline** — 训练损失持续下降（0.3→0.2），验证损失在 epoch 5 后开始反弹，验证准确率停在 ~0.4，典型过拟合。
 
-![Baseline Loss/Accuracy](./experiment_outputs/cnn_flower_py/fig_baseline_loss_acc.png)
+![Baseline Loss/Accuracy](../experiment_outputs/cnn_flower_py/fig_baseline_loss_acc.png)
 
 **优化版** — 训练和验证损失同步平稳下降，验证准确率提升至 ~0.71，过拟合大幅缓解。
 
-![Optimized Loss/Accuracy](./experiment_outputs/cnn_flower_optimized/fig_optimized_loss_acc.png)
+![Optimized Loss/Accuracy](../experiment_outputs/cnn_flower_optimized/fig_optimized_loss_acc.png)
 
 **残差版** — 验证准确率进一步提升至 ~0.76，残差连接帮助更深网络稳定训练。
 
-![Residual Loss/Accuracy](./experiment_outputs/cnn_flower_residual/fig_residual_loss_acc.png)
+![Residual Loss/Accuracy](../experiment_outputs/cnn_flower_residual/fig_residual_loss_acc.png)
 
 ### 混淆矩阵
 

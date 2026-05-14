@@ -66,11 +66,11 @@ Deconv 模式:
 
 **原始 Baseline（10 epoch, BCE）：** 数字轮廓开始出现，但边缘模糊，部分数字难以辨认。
 
-![原始 Baseline 生成结果](./experiment_outputs/dcgan_mnist_py/generated_final.png)
+![原始 Baseline 生成结果](../experiment_outputs/dcgan_mnist_py/generated_final.png)
 
 **优化版（50 epoch, Hinge + Strong D）：** 数字结构清晰，笔画边缘平滑，10 个类别均覆盖良好。
 
-![优化版生成结果](./experiment_outputs/dcgan_mnist_improved/generated_final.png)
+![优化版生成结果](../experiment_outputs/dcgan_mnist_improved/generated_final.png)
 
 ### 训练过程可视化
 
@@ -78,17 +78,17 @@ Deconv 模式:
 
 | 第 1 epoch | 第 10 epoch | 第 50 epoch |
 |-----------|------------|------------|
-| ![Epoch 1](./experiment_outputs/dcgan_mnist_improved/snapshot_epoch_001.png) | ![Epoch 10](./experiment_outputs/dcgan_mnist_improved/snapshot_epoch_010.png) | ![Epoch 50](./experiment_outputs/dcgan_mnist_improved/snapshot_epoch_050.png) |
+| ![Epoch 1](../experiment_outputs/dcgan_mnist_improved/snapshot_epoch_001.png) | ![Epoch 10](../experiment_outputs/dcgan_mnist_improved/snapshot_epoch_010.png) | ![Epoch 50](../experiment_outputs/dcgan_mnist_improved/snapshot_epoch_050.png) |
 
 ### 损失曲线
 
 优化版训练损失稳定下降：判别器损失收敛至 ~1.94，生成器损失收敛至 ~0.06。
 
-![训练损失曲线](./experiment_outputs/dcgan_mnist_improved/fig_train_loss.png)
+![训练损失曲线](../experiment_outputs/dcgan_mnist_improved/fig_train_loss.png)
 
 判别器 logits 趋势显示 D(real) 和 D(fake) 差距逐渐缩小，表明判别能力趋于平衡：
 
-![判别器 logits](./experiment_outputs/dcgan_mnist_improved/fig_discriminator_logits.png)
+![判别器 logits](../experiment_outputs/dcgan_mnist_improved/fig_discriminator_logits.png)
 
 ## 快速开始
 

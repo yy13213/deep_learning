@@ -80,18 +80,18 @@ SequenceRegressor:
 
 **原始 Baseline（look_back=3, 单层 Linear）：** LSTM 和 GRU 都能较好拟合正弦曲线，但窗口过短限制了长期预测能力。
 
-![原始 Baseline LSTM 预测](./experiment_outputs/rnn_sin_py/fig_pred_lstm.png)
+![原始 Baseline LSTM 预测](../experiment_outputs/rnn_sin_py/fig_pred_lstm.png)
 
 **优化版（look_back=30, MLP Head + 残差预测 + AdamW）：** LSTM 和 GRU 预测曲线与真实值高度重合，预测精度显著提升。
 
-![优化版 LSTM 预测](./experiment_outputs/rnn_sin_optimized/fig_pred_lstm.png)
-![优化版 GRU 预测](./experiment_outputs/rnn_sin_optimized/fig_pred_gru.png)
+![优化版 LSTM 预测](../experiment_outputs/rnn_sin_optimized/fig_pred_lstm.png)
+![优化版 GRU 预测](../experiment_outputs/rnn_sin_optimized/fig_pred_gru.png)
 
 ### 训练损失曲线
 
 优化版训练与验证损失快速收敛，三种模型均在 50 个 epoch 内降至接近 0，无过拟合：
 
-![训练和验证损失曲线](./experiment_outputs/rnn_sin_optimized/fig_loss_train_val_all.png)
+![训练和验证损失曲线](../experiment_outputs/rnn_sin_optimized/fig_loss_train_val_all.png)
 
 ### 模型性能对比
 
