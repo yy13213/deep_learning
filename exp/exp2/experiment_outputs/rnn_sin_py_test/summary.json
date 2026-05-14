@@ -1,0 +1,8 @@
+{
+  "rnn_final_train_loss": 2.6880288494408667e-05,
+  "rnn_test_mse": 1.0052954166894779e-05,
+  "lstm_final_train_loss": 3.705198873325976e-05,
+  "lstm_test_mse": 1.6634789062663913e-05,
+  "gru_final_train_loss": 2.1800051013776805e-05,
+  "gru_test_mse": 9.26479697227478e-05
+}

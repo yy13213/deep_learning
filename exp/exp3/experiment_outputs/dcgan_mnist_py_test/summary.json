@@ -1,0 +1,10 @@
+{
+  "epochs": 8,
+  "batch_size": 128,
+  "noise_dim": 100,
+  "lr": 0.0002,
+  "device": "cuda",
+  "limit_train": null,
+  "final_D_loss": 1.1923024048153152,
+  "final_G_loss": 1.1473240386217067
+}
