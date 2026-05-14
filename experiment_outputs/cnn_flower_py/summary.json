@@ -1,0 +1,10 @@
+{
+  "epochs": 2,
+  "batch_size": 32,
+  "learning_rate": 0.001,
+  "class_to_idx": {
+    "test": 0,
+    "train": 1
+  },
+  "final_val_acc": 0.8754578828811646
+}
