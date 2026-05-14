@@ -104,7 +104,7 @@ ResidualBlock:
 
 **原始 Baseline** — 训练损失持续下降（0.3→0.2），验证损失在 epoch 5 后开始反弹，验证准确率停在 ~0.4，典型过拟合。
 
-![Baseline Loss/Accuracy](.../experiment_outputs/cnn_flower_py/fig_baseline_loss_acc.png)
+![Baseline Loss/Accuracy](../experiment_outputs/cnn_flower_py/fig_baseline_loss_acc.png)
 
 **优化版** — 训练和验证损失同步平稳下降，验证准确率提升至 ~0.71，过拟合大幅缓解。
 
