@@ -18,7 +18,7 @@ from torchvision.datasets import ImageFolder
 
 
 IMAGE_SIZE = 224
-DEVICE = torch.device("cuda" if torch.cuda.is_available() else "cpu")
+DEVICE = torch.device("cuda:1" if torch.cuda.is_available() else "cpu")
 
 # 采用 ImageNet 统计量，后续如果切换到预训练 ResNet/EfficientNet 也可以直接复用。
 NORMALIZE = transforms.Normalize(
@@ -107,7 +107,7 @@ def split_train_val_data(
     val_transform=None,
     zip_path: Optional[str] = None,
     extract_to: Optional[str] = None,
-    num_workers: int = 0,
+    num_workers: int = 4,
     seed: int = 42,
 ):
     """按类别进行随机分层切分，避免原始文件顺序造成训练/验证分布偏差。"""
@@ -269,7 +269,7 @@ class CNN(nn.Module):
     因此全连接层输入维度仍为 256 * 7 * 7。
     """
 
-    def __init__(self, in_channels: int = 3, n_classes: int = 5, p_drop: float = 0.4):
+    def __init__(self, in_channels: int = 3, n_classes: int = 102, p_drop: float = 0.4):
         super().__init__()
 
         self.stem = nn.Sequential(
@@ -443,9 +443,9 @@ def save_confusion_matrix_csv(cm: np.ndarray, class_names, out_path: Path) -> No
 
 def run_smoke_test() -> None:
     x = torch.randn(4, 3, IMAGE_SIZE, IMAGE_SIZE, device=DEVICE)
-    y = torch.randint(0, 5, (4,), device=DEVICE)
+    y = torch.randint(0, 102, (4,), device=DEVICE)
     loss_fn = nn.CrossEntropyLoss()
-    model = CNN(3, 5).to(DEVICE)
+    model = CNN(3, 102).to(DEVICE)
     logits = model(x)
     loss = loss_fn(logits, y)
     loss.backward()
@@ -456,15 +456,15 @@ def main() -> None:
     parser = argparse.ArgumentParser(description="Residual CNN flower classification script")
     parser.add_argument("--data-dir", default=os.environ.get("FLOWERS_DATA_DIR", "data/flowers"))
     parser.add_argument("--zip-path", default=os.environ.get("FLOWERS_ZIP_PATH", ""))
-    parser.add_argument("--epochs", type=int, default=30)
-    parser.add_argument("--batch-size", type=int, default=32)
+    parser.add_argument("--epochs", type=int, default=50)
+    parser.add_argument("--batch-size", type=int, default=512)
     parser.add_argument("--learning-rate", type=float, default=3e-4)
     parser.add_argument("--weight-decay", type=float, default=1e-4)
     parser.add_argument("--dropout", type=float, default=0.4)
     parser.add_argument("--label-smoothing", type=float, default=0.1)
     parser.add_argument("--grad-clip", type=float, default=1.0)
     parser.add_argument("--seed", type=int, default=42)
-    parser.add_argument("--num-workers", type=int, default=0)
+    parser.add_argument("--num-workers", type=int, default=16)
     parser.add_argument("--no-scheduler", action="store_true")
     parser.add_argument("--smoke-test", action="store_true")
     args = parser.parse_args()

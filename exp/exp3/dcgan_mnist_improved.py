@@ -10,17 +10,6 @@ import matplotlib.pyplot as plt
 import numpy as np
 import torch
 
-# Compatibility shim for environments where torchvision was installed without
-# compiled custom ops. It is harmless when the real operator already exists and
-# allows torchvision.datasets/transforms/utils to be imported for this MNIST task.
-try:
-    from torch.library import Library
-
-    _torchvision_stub_lib = Library("torchvision", "DEF")
-    _torchvision_stub_lib.define("nms(Tensor dets, Tensor scores, float iou_threshold) -> Tensor")
-except Exception:
-    _torchvision_stub_lib = None
-
 import torch.nn as nn
 import torch.optim as optim
 import torchvision

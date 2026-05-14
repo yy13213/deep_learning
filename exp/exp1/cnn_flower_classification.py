@@ -28,7 +28,7 @@ DEVICE = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 NORMALIZE = transforms.Normalize([0.5, 0.5, 0.5], [0.5, 0.5, 0.5])
 TRANSFORMER_IMAGE = transforms.Compose(
     [
-        transforms.Resize((64, 64)),
+        transforms.Resize((28, 28)),
         transforms.ToTensor(),
         NORMALIZE,
     ]
@@ -143,7 +143,7 @@ class CNN(nn.Module):
             nn.ReLU(),
             nn.MaxPool2d(kernel_size=2),
         )
-        self.fc1 = nn.Sequential(nn.Linear(12 * 16 * 16, 196), nn.ReLU())
+        self.fc1 = nn.Sequential(nn.Linear(12 * 7 * 7, 196), nn.ReLU())
         self.fc2 = nn.Sequential(nn.Linear(196, 84), nn.ReLU())
         self.fc3 = nn.Linear(84, n_classes)
 
@@ -173,7 +173,7 @@ class CNNDeep(nn.Module):
         )
         self.fc = nn.Sequential(
             nn.Flatten(),
-            nn.Linear(128 * 8 * 8, 256),
+            nn.Linear(128 * 3 * 3, 256),
             nn.ReLU(),
             nn.Dropout(p_drop),
             nn.Linear(256, n_classes),
@@ -242,7 +242,7 @@ def save_history_figure(history: dict, out_path: Path) -> None:
 
 
 def run_smoke_test() -> None:
-    x = torch.randn(8, 3, 64, 64, device=DEVICE)
+    x = torch.randn(8, 3, 28, 28, device=DEVICE)
     y = torch.randint(0, 102, (8,), device=DEVICE)
     loss_fn = nn.CrossEntropyLoss()
     for name, model in [("baseline", CNN(3, 102)), ("deep", CNNDeep(3, 102))]:
@@ -255,9 +255,9 @@ def run_smoke_test() -> None:
 
 def main() -> None:
     parser = argparse.ArgumentParser(description="exp1 CNN flower classification script")
-    parser.add_argument("--data-dir", default=os.environ.get("FLOWERS_DATA_DIR", "data/flowers/images"))
+    parser.add_argument("--data-dir", default=os.environ.get("FLOWERS_DATA_DIR", "data/flowers"))
     parser.add_argument("--zip-path", default=os.environ.get("FLOWERS_ZIP_PATH", ""))
-    parser.add_argument("--epochs", type=int, default=10)
+    parser.add_argument("--epochs", type=int, default=30)
     parser.add_argument("--batch-size", type=int, default=20)
     parser.add_argument("--learning-rate", type=float, default=1e-3)
     parser.add_argument("--seed", type=int, default=42)
