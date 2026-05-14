@@ -457,7 +457,7 @@ def main() -> None:
     parser.add_argument("--data-dir", default=os.environ.get("FLOWERS_DATA_DIR", "data/flowers"))
     parser.add_argument("--zip-path", default=os.environ.get("FLOWERS_ZIP_PATH", ""))
     parser.add_argument("--epochs", type=int, default=50)
-    parser.add_argument("--batch-size", type=int, default=512)
+    parser.add_argument("--batch-size", type=int, default=32)
     parser.add_argument("--learning-rate", type=float, default=3e-4)
     parser.add_argument("--weight-decay", type=float, default=1e-4)
     parser.add_argument("--dropout", type=float, default=0.4)
